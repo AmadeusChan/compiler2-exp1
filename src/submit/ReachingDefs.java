@@ -4,26 +4,116 @@ package submit;
 import joeq.Compiler.Quad.*;
 import flow.Flow;
 
+import java.util.*;
+
 /**
  * Skeleton class for implementing a reaching definition analysis
  * using the Flow.Analysis interface.
  */
 public class ReachingDefs implements Flow.Analysis {
 
+    public static class Definition {
+	    private String var;
+	    private int ID;
+
+	    public Definition(String var, int ID) {
+		    this.var = var;
+		    this.ID = ID;
+	    }
+	    public void setVar(String var) {
+		    this.var = var;
+	    }
+	    public void setID(int ID) {
+		    this.ID = ID;
+	    }
+	    public String getVar() {
+		    return var;
+	    }
+	    public int getID() {
+		    return ID;
+	    }
+
+	    @Override
+	    public String toString() {
+		    return var + " " + ID;
+	    }
+
+	    @Override
+	    public boolean equals(Object o) {
+		    if (o instanceof Definition) {
+			    Definition d = (Definition) o;
+			    return this.toString().equals(d.toString());
+		    }
+		    return false;
+	    }
+
+	    @Override
+	    public int hashCode() {
+		    return this.toString().hashCode();
+	    }
+    }
+
     /**
      * Class for the dataflow objects in the ReachingDefs analysis.
      * You are free to change this class or move it to another file.
      */
-    public class MyDataflowObject implements Flow.DataflowObject {
+    public static class MyDataflowObject implements Flow.DataflowObject {
         /**
          * Methods from the Flow.DataflowObject interface.
          * See Flow.java for the meaning of these methods.
          * These need to be filled in.
          */
-        public void setToTop() {}
-        public void setToBottom() {}
-        public void meetWith (Flow.DataflowObject o) {}
-        public void copy (Flow.DataflowObject o) {}
+	private Set<Definition> set;
+	public static Set<Definition> universalSet;
+
+	public MyDataflowObject() {
+		set = new HashSet<Definition>();
+	}
+
+        public void setToTop() {
+		set = new HashSet<Definition>();
+	}
+
+        public void setToBottom() {
+		set = new HashSet<Definition>(universalSet);
+	}
+
+        public void meetWith (Flow.DataflowObject o) {
+		MyDataflowObject a = (MyDataflowObject) o;
+		set.addAll(a.set);
+	}
+
+        public void copy (Flow.DataflowObject o) {
+		MyDataflowObject a = (MyDataflowObject) o;
+		set = new HashSet<Definition>(a.set);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof MyDataflowObject) {
+			MyDataflowObject a = (MyDataflowObject) o;
+			return set.equals(a.set);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return set.hashCode();
+	}
+
+	public void genDef(String var, int ID) {
+		Definition d = new Definition(var, ID);
+		set.add(d);
+	}
+
+	public void killDef(String var) {
+		for (Definition d: set) {
+			if (var.equals(d.getVar())) {
+				set.remove(d);
+			}
+		}
+	}
 
         /**
          * toString() method for the dataflow objects which is used
@@ -35,7 +125,13 @@ public class ReachingDefs implements Flow.Analysis {
          * your reaching definitions analysis must match this exactly.
          */
         @Override
-        public String toString() { return ""; }
+        public String toString() {
+		Set<Integer> idSet = new TreeSet<Integer>();
+		for (Definition d: set) {
+			idSet.add(d.getID());
+		}
+		return idSet.toString(); 
+	}
     }
 
     /**
@@ -87,6 +183,7 @@ public class ReachingDefs implements Flow.Analysis {
         /************************************************
          * Your remaining initialization code goes here *
          ************************************************/
+	// TODO
     }
 
     /**
@@ -114,15 +211,37 @@ public class ReachingDefs implements Flow.Analysis {
      * See Flow.java for the meaning of these methods.
      * These need to be filled in.
      */
-    public boolean isForward () { return false; }
+    public boolean isForward () { 
+	    return true;
+    }
+
+    // TODO
     public Flow.DataflowObject getEntry() { return null; }
+
+    // TODO
     public Flow.DataflowObject getExit() { return null; }
+
+    // TODO
     public void setEntry(Flow.DataflowObject value) {}
+
+    // TODO
     public void setExit(Flow.DataflowObject value) {}
+
+    // TODO
     public Flow.DataflowObject getIn(Quad q) { return null; }
+
+    // TODO
     public Flow.DataflowObject getOut(Quad q) { return null; }
+
+    // TODO
     public void setIn(Quad q, Flow.DataflowObject value) {}
+
+    // TODO
     public void setOut(Quad q, Flow.DataflowObject value) {}
+
+    // TODO
     public Flow.DataflowObject newTempVar() { return null; }
+
+    // TODO
     public void processQuad(Quad q) {}
 }
