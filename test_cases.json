@@ -18,5 +18,16 @@
 		"analysis": "flow.ConstantProp",
 		"test_case": "test.TestTwo",
 		"output": "TestTwo.cp.out"
+	},
+	{
+		"analysis": "submit.ReachingDefs",
+		"test_case": "test.Test", 
+		"output": "Test.rd.out"
+	},
+	{
+		"analysis": "submit.ReachingDefs",
+		"test_case": "test.TestTwo", 
+		"output": "TestTwo.rd.out"
 	}
+
 ]

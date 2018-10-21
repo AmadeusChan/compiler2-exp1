@@ -5,6 +5,7 @@ import joeq.Compiler.Quad.*;
 import flow.Flow;
 
 import java.util.*;
+import joeq.Compiler.Quad.Operand.RegisterOperand;
 
 /**
  * Skeleton class for implementing a reaching definition analysis
@@ -108,11 +109,13 @@ public class ReachingDefs implements Flow.Analysis {
 	}
 
 	public void killDef(String var) {
+		ArrayList<Definition> removeList = new ArrayList<Definition>();
 		for (Definition d: set) {
 			if (var.equals(d.getVar())) {
-				set.remove(d);
+				removeList.add(d);
 			}
 		}
+		set.removeAll(removeList);
 	}
 
         /**
@@ -183,7 +186,20 @@ public class ReachingDefs implements Flow.Analysis {
         /************************************************
          * Your remaining initialization code goes here *
          ************************************************/
-	// TODO
+
+	Set<Definition> s = new HashSet<Definition>();
+	MyDataflowObject.universalSet = s;
+
+	qit = new QuadIterator(cfg);
+	while (qit.hasNext()) {
+		Quad q = qit.next();
+		for (RegisterOperand def : q.getDefinedRegisters()) {
+			s.add(new Definition(def.getRegister().toString(), q.getID()));
+		}
+	}
+
+	transferfn.val = new MyDataflowObject();
+	
     }
 
     /**
@@ -215,33 +231,71 @@ public class ReachingDefs implements Flow.Analysis {
 	    return true;
     }
 
-    // TODO
-    public Flow.DataflowObject getEntry() { return null; }
+    public Flow.DataflowObject getEntry() {
+	    Flow.DataflowObject result = newTempVar();
+	    result.copy(entry);
+	    return result;
+    }
 
-    // TODO
-    public Flow.DataflowObject getExit() { return null; }
+    public Flow.DataflowObject getExit() {
+	    Flow.DataflowObject result = newTempVar();
+	    result.copy(exit);
+	    return result;
+    }
 
-    // TODO
-    public void setEntry(Flow.DataflowObject value) {}
+    public void setEntry(Flow.DataflowObject value) {
+	    entry.copy(value);
+    }
 
-    // TODO
-    public void setExit(Flow.DataflowObject value) {}
+    public void setExit(Flow.DataflowObject value) {
+	    exit.copy(value);
+    }
 
-    // TODO
-    public Flow.DataflowObject getIn(Quad q) { return null; }
+    public Flow.DataflowObject getIn(Quad q) {
+	    Flow.DataflowObject result = newTempVar();
+	    result.copy(in[q.getID()]);
+	    return result;
+    }
 
-    // TODO
-    public Flow.DataflowObject getOut(Quad q) { return null; }
+    public Flow.DataflowObject getOut(Quad q) {
+	    Flow.DataflowObject result = newTempVar();
+	    result.copy(out[q.getID()]);
+	    return result;
+    }
 
-    // TODO
-    public void setIn(Quad q, Flow.DataflowObject value) {}
+    public void setIn(Quad q, Flow.DataflowObject value) {
+	    in[q.getID()].copy(value);
+    }
 
-    // TODO
-    public void setOut(Quad q, Flow.DataflowObject value) {}
+    public void setOut(Quad q, Flow.DataflowObject value) {
+	    out[q.getID()].copy(value);
+    }
 
-    // TODO
-    public Flow.DataflowObject newTempVar() { return null; }
+    public Flow.DataflowObject newTempVar() {
+	    return new MyDataflowObject();
+    }
 
-    // TODO
-    public void processQuad(Quad q) {}
+    private TransferFunction transferfn = new TransferFunction();
+
+    public void processQuad(Quad q) {
+	    //System.out.println(out == null);
+	    transferfn.val.copy(in[q.getID()]);
+	    //System.out.println("hello");
+	    transferfn.visitQuad(q);
+	    out[q.getID()].copy(transferfn.val);
+    }
+
+    public static class TransferFunction extends QuadVisitor.EmptyVisitor {
+	    MyDataflowObject val;
+
+	    @Override
+	    public void visitQuad(Quad q) {
+		    for (RegisterOperand def: q.getDefinedRegisters()) {
+			    val.killDef(def.getRegister().toString());
+		    }
+		    for (RegisterOperand def: q.getDefinedRegisters()) {
+			    val.genDef(def.getRegister().toString(), q.getID());
+		    }
+	    }
+    };
 }
