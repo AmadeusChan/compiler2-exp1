@@ -1,22 +1,33 @@
 !_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
 !_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
-!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
-!_TAG_PROGRAM_NAME	Exuberant Ctags	//
-!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.8	//
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/c04ceb8/
+0	test_cases.json	/^	{$/;"	o
+1	test_cases.json	/^	{$/;"	o
+2	test_cases.json	/^	{$/;"	o
+3	test_cases.json	/^	{$/;"	o
+4	test_cases.json	/^	{$/;"	o
+5	test_cases.json	/^	{$/;"	o
 Analysis	src/flow/Flow.java	/^    public static interface Analysis {$/;"	i	class:Flow
 ConstantProp	src/flow/ConstantProp.java	/^public class ConstantProp implements Flow.Analysis {$/;"	c
 ConstantPropTable	src/flow/ConstantProp.java	/^        public ConstantPropTable() {$/;"	m	class:ConstantProp.ConstantPropTable
 ConstantPropTable	src/flow/ConstantProp.java	/^    public static class ConstantPropTable implements Flow.DataflowObject {$/;"	c	class:ConstantProp
 CountQuads	src/examples/CountQuads.java	/^class CountQuads {$/;"	c
 DataflowObject	src/flow/Flow.java	/^    public static interface DataflowObject {$/;"	i	class:Flow
+Definition	src/submit/ReachingDefs.java	/^	    public Definition(String var, int ID) {$/;"	m	class:ReachingDefs.Definition
+Definition	src/submit/ReachingDefs.java	/^    public static class Definition {$/;"	c	class:ReachingDefs
 ExprTest	src/examples/ExprTest.java	/^class ExprTest {$/;"	c
 Faintness	src/submit/Faintness.java	/^public class Faintness implements Flow.Analysis {$/;"	c
 Flow	src/flow/Flow.java	/^public abstract class Flow {$/;"	c
+ID	src/submit/ReachingDefs.java	/^	    private int ID;$/;"	f	class:ReachingDefs.Definition	file:
 JAVAPATH	Makefile	/^JAVAPATH=\/opt\/jdk1.5.0_22\/bin\/$/;"	m
 Liveness	src/flow/Liveness.java	/^public class Liveness implements Flow.Analysis {$/;"	c
 MyDataflowObject	src/submit/Faintness.java	/^    public class MyDataflowObject implements Flow.DataflowObject {$/;"	c	class:Faintness
-MyDataflowObject	src/submit/ReachingDefs.java	/^    public class MyDataflowObject implements Flow.DataflowObject {$/;"	c	class:ReachingDefs
+MyDataflowObject	src/submit/ReachingDefs.java	/^	public MyDataflowObject() {$/;"	m	class:ReachingDefs.MyDataflowObject
+MyDataflowObject	src/submit/ReachingDefs.java	/^    public static class MyDataflowObject implements Flow.DataflowObject {$/;"	c	class:ReachingDefs
 MySolver	src/submit/MySolver.java	/^public class MySolver implements Flow.Solver {$/;"	c
 PrintQuads	src/examples/PrintQuads.java	/^class PrintQuads {$/;"	c
 QuadCounter	src/examples/CountQuads.java	/^    public static class QuadCounter extends QuadVisitor.EmptyVisitor {$/;"	c	class:CountQuads
@@ -29,18 +40,29 @@ TestFaintness	src/submit/TestFaintness.java	/^class TestFaintness {$/;"	c
 TestTwo	src/test/TestTwo.java	/^public class TestTwo {$/;"	c
 TransferFunction	src/flow/ConstantProp.java	/^    public static class TransferFunction extends QuadVisitor.EmptyVisitor {$/;"	c	class:ConstantProp
 TransferFunction	src/flow/Liveness.java	/^    public static class TransferFunction extends QuadVisitor.EmptyVisitor {$/;"	c	class:Liveness
+TransferFunction	src/submit/ReachingDefs.java	/^    public static class TransferFunction extends QuadVisitor.EmptyVisitor {$/;"	c	class:ReachingDefs
 VarSet	src/flow/Liveness.java	/^        public VarSet() { set = new TreeSet<String>(); }$/;"	m	class:Liveness.VarSet
 VarSet	src/flow/Liveness.java	/^    public static class VarSet implements Flow.DataflowObject {$/;"	c	class:Liveness
 analysis	src/submit/MySolver.java	/^    protected Flow.Analysis analysis;$/;"	f	class:MySolver
+analysis	test_cases.json	/^		"analysis": "flow.ConstantProp",$/;"	s	object:2
+analysis	test_cases.json	/^		"analysis": "flow.ConstantProp",$/;"	s	object:3
+analysis	test_cases.json	/^		"analysis": "flow.Liveness",$/;"	s	object:0
+analysis	test_cases.json	/^		"analysis": "flow.Liveness",$/;"	s	object:1
+analysis	test_cases.json	/^		"analysis": "submit.ReachingDefs",$/;"	s	object:4
+analysis	test_cases.json	/^		"analysis": "submit.ReachingDefs",$/;"	s	object:5
+clean	Makefile	/^clean:$/;"	t
+command	test.py	/^		command = ".\/run.sh flow.Flow submit.MySolver %s %s > %s\/%s" % (test_case["analysis"], test_/;"	v
+compile	Makefile	/^compile: clean$/;"	t
 constant	src/flow/ConstantProp.java	/^        private int constant;$/;"	f	class:ConstantProp.SingleCP	file:
 copy	src/flow/ConstantProp.java	/^        public void copy(Flow.DataflowObject o) {$/;"	m	class:ConstantProp.ConstantPropTable
 copy	src/flow/ConstantProp.java	/^        public void copy(Flow.DataflowObject o) {$/;"	m	class:ConstantProp.SingleCP
 copy	src/flow/Flow.java	/^        void copy (DataflowObject o);$/;"	m	interface:Flow.DataflowObject
 copy	src/flow/Liveness.java	/^        public void copy(Flow.DataflowObject o) $/;"	m	class:Liveness.VarSet
 copy	src/submit/Faintness.java	/^        public void copy (Flow.DataflowObject o) {}$/;"	m	class:Faintness.MyDataflowObject
-copy	src/submit/ReachingDefs.java	/^        public void copy (Flow.DataflowObject o) {}$/;"	m	class:ReachingDefs.MyDataflowObject
+copy	src/submit/ReachingDefs.java	/^        public void copy (Flow.DataflowObject o) {$/;"	m	class:ReachingDefs.MyDataflowObject
 core	src/flow/ConstantProp.java	/^        private static Set<String> core = new HashSet<String>();$/;"	f	class:ConstantProp.ConstantPropTable	file:
 count	src/examples/CountQuads.java	/^        public int count = 0;$/;"	f	class:CountQuads.QuadCounter
+diff_files	test.py	/^def diff_files(file_1, file_2):$/;"	f
 entry	src/flow/ConstantProp.java	/^    private ConstantPropTable entry, exit;$/;"	f	class:ConstantProp	file:
 entry	src/flow/Liveness.java	/^    private VarSet entry, exit;$/;"	f	class:Liveness	file:
 entry	src/submit/Faintness.java	/^    private MyDataflowObject entry, exit;$/;"	f	class:Faintness	file:
@@ -48,6 +70,8 @@ entry	src/submit/ReachingDefs.java	/^    private MyDataflowObject entry, exit;$/
 equals	src/flow/ConstantProp.java	/^        public boolean equals(Object o) {$/;"	m	class:ConstantProp.ConstantPropTable
 equals	src/flow/ConstantProp.java	/^        public boolean equals(Object o) {$/;"	m	class:ConstantProp.SingleCP
 equals	src/flow/Liveness.java	/^        public boolean equals(Object o) $/;"	m	class:Liveness.VarSet
+equals	src/submit/ReachingDefs.java	/^	    public boolean equals(Object o) {$/;"	m	class:ReachingDefs.Definition
+equals	src/submit/ReachingDefs.java	/^	public boolean equals(Object o) {$/;"	m	class:ReachingDefs.MyDataflowObject
 examples	src/examples/CountQuads.java	/^package examples;$/;"	p
 examples	src/examples/ExprTest.java	/^package examples;$/;"	p
 examples	src/examples/PrintQuads.java	/^package examples;$/;"	p
@@ -55,10 +79,13 @@ exit	src/flow/ConstantProp.java	/^    private ConstantPropTable entry, exit;$/;"
 exit	src/flow/Liveness.java	/^    private VarSet entry, exit;$/;"	f	class:Liveness	file:
 exit	src/submit/Faintness.java	/^    private MyDataflowObject entry, exit;$/;"	f	class:Faintness	file:
 exit	src/submit/ReachingDefs.java	/^    private MyDataflowObject entry, exit;$/;"	f	class:ReachingDefs	file:
+file_1	test.py	/^		file_1 = my_results_dir + "\/" + test_case["output"]$/;"	v
+file_2	test.py	/^		file_2 = ".\/src\/test\/" + test_case["output"]$/;"	v
 flow	src/flow/ConstantProp.java	/^package flow;$/;"	p
 flow	src/flow/Flow.java	/^package flow;$/;"	p
 flow	src/flow/Liveness.java	/^package flow;$/;"	p
 frobble	src/test/TestTwo.java	/^    public static int frobble(int x) {$/;"	m	class:TestTwo
+genDef	src/submit/ReachingDefs.java	/^	public void genDef(String var, int ID) {$/;"	m	class:ReachingDefs.MyDataflowObject
 genVar	src/flow/Liveness.java	/^        public void genVar(String v) {set.add(v);}$/;"	m	class:Liveness.VarSet
 get	src/flow/ConstantProp.java	/^        public SingleCP get(String key) {$/;"	m	class:ConstantProp.ConstantPropTable
 getConst	src/flow/ConstantProp.java	/^        private int getConst(Operand op) {$/;"	m	class:ConstantProp.TransferFunction	file:
@@ -67,25 +94,29 @@ getEntry	src/flow/ConstantProp.java	/^    public Flow.DataflowObject getEntry() 
 getEntry	src/flow/Flow.java	/^        DataflowObject getEntry();$/;"	m	interface:Flow.Analysis
 getEntry	src/flow/Liveness.java	/^    public Flow.DataflowObject getEntry() $/;"	m	class:Liveness
 getEntry	src/submit/Faintness.java	/^    public Flow.DataflowObject getEntry() { return null; }$/;"	m	class:Faintness
-getEntry	src/submit/ReachingDefs.java	/^    public Flow.DataflowObject getEntry() { return null; }$/;"	m	class:ReachingDefs
+getEntry	src/submit/ReachingDefs.java	/^    public Flow.DataflowObject getEntry() {$/;"	m	class:ReachingDefs
 getExit	src/flow/ConstantProp.java	/^    public Flow.DataflowObject getExit() {$/;"	m	class:ConstantProp
 getExit	src/flow/Flow.java	/^        DataflowObject getExit();$/;"	m	interface:Flow.Analysis
 getExit	src/flow/Liveness.java	/^    public Flow.DataflowObject getExit() $/;"	m	class:Liveness
 getExit	src/submit/Faintness.java	/^    public Flow.DataflowObject getExit() { return null; }$/;"	m	class:Faintness
-getExit	src/submit/ReachingDefs.java	/^    public Flow.DataflowObject getExit() { return null; }$/;"	m	class:ReachingDefs
+getExit	src/submit/ReachingDefs.java	/^    public Flow.DataflowObject getExit() {$/;"	m	class:ReachingDefs
+getID	src/submit/ReachingDefs.java	/^	    public int getID() {$/;"	m	class:ReachingDefs.Definition
 getIn	src/flow/ConstantProp.java	/^    public Flow.DataflowObject getIn(Quad q) {$/;"	m	class:ConstantProp
 getIn	src/flow/Flow.java	/^        DataflowObject getIn(Quad q);$/;"	m	interface:Flow.Analysis
 getIn	src/flow/Liveness.java	/^    public Flow.DataflowObject getIn(Quad q) $/;"	m	class:Liveness
 getIn	src/submit/Faintness.java	/^    public Flow.DataflowObject getIn(Quad q) { return null; }$/;"	m	class:Faintness
-getIn	src/submit/ReachingDefs.java	/^    public Flow.DataflowObject getIn(Quad q) { return null; }$/;"	m	class:ReachingDefs
+getIn	src/submit/ReachingDefs.java	/^    public Flow.DataflowObject getIn(Quad q) {$/;"	m	class:ReachingDefs
 getOut	src/flow/ConstantProp.java	/^    public Flow.DataflowObject getOut(Quad q) {$/;"	m	class:ConstantProp
 getOut	src/flow/Flow.java	/^        DataflowObject getOut(Quad q);$/;"	m	interface:Flow.Analysis
 getOut	src/flow/Liveness.java	/^    public Flow.DataflowObject getOut(Quad q) $/;"	m	class:Liveness
 getOut	src/submit/Faintness.java	/^    public Flow.DataflowObject getOut(Quad q) { return null; }$/;"	m	class:Faintness
-getOut	src/submit/ReachingDefs.java	/^    public Flow.DataflowObject getOut(Quad q) { return null; }$/;"	m	class:ReachingDefs
+getOut	src/submit/ReachingDefs.java	/^    public Flow.DataflowObject getOut(Quad q) {$/;"	m	class:ReachingDefs
+getVar	src/submit/ReachingDefs.java	/^	    public String getVar() {$/;"	m	class:ReachingDefs.Definition
 hashCode	src/flow/ConstantProp.java	/^        public int hashCode() {$/;"	m	class:ConstantProp.ConstantPropTable
 hashCode	src/flow/ConstantProp.java	/^        public int hashCode() {$/;"	m	class:ConstantProp.SingleCP
 hashCode	src/flow/Liveness.java	/^        public int hashCode() {$/;"	m	class:Liveness.VarSet
+hashCode	src/submit/ReachingDefs.java	/^	    public int hashCode() {$/;"	m	class:ReachingDefs.Definition
+hashCode	src/submit/ReachingDefs.java	/^	public int hashCode() {$/;"	m	class:ReachingDefs.MyDataflowObject
 in	src/flow/ConstantProp.java	/^    private ConstantPropTable[] in, out;$/;"	f	class:ConstantProp	file:
 in	src/flow/Liveness.java	/^    private VarSet[] in, out;$/;"	f	class:Liveness	file:
 in	src/submit/Faintness.java	/^    private MyDataflowObject[] in, out;$/;"	f	class:Faintness	file:
@@ -96,11 +127,12 @@ isForward	src/flow/ConstantProp.java	/^    public boolean isForward() {$/;"	m	cl
 isForward	src/flow/Flow.java	/^        boolean isForward ();$/;"	m	interface:Flow.Analysis
 isForward	src/flow/Liveness.java	/^    public boolean isForward() { return false; }$/;"	m	class:Liveness
 isForward	src/submit/Faintness.java	/^    public boolean isForward () { return false; }$/;"	m	class:Faintness
-isForward	src/submit/ReachingDefs.java	/^    public boolean isForward () { return false; }$/;"	m	class:ReachingDefs
+isForward	src/submit/ReachingDefs.java	/^    public boolean isForward () { $/;"	m	class:ReachingDefs
 isNAC	src/flow/ConstantProp.java	/^        private boolean isNAC(Operand op) {$/;"	m	class:ConstantProp.TransferFunction	file:
 isNAC	src/flow/ConstantProp.java	/^        public boolean isNAC() {$/;"	m	class:ConstantProp.SingleCP
 isUndef	src/flow/ConstantProp.java	/^        private boolean isUndef(Operand op) {$/;"	m	class:ConstantProp.TransferFunction	file:
 isUndef	src/flow/ConstantProp.java	/^        public boolean isUndef() {$/;"	m	class:ConstantProp.SingleCP
+killDef	src/submit/ReachingDefs.java	/^	public void killDef(String var) {$/;"	m	class:ReachingDefs.MyDataflowObject
 killVar	src/flow/Liveness.java	/^        public void killVar(String v) {set.remove(v);}$/;"	m	class:Liveness.VarSet
 main	src/examples/CountQuads.java	/^    public static void main(String[] args) {$/;"	m	class:CountQuads
 main	src/examples/PrintQuads.java	/^    public static void main(String[] args) {$/;"	m	class:PrintQuads
@@ -113,16 +145,23 @@ meetWith	src/flow/ConstantProp.java	/^        public void meetWith(Flow.Dataflow
 meetWith	src/flow/Flow.java	/^        void meetWith (DataflowObject o);$/;"	m	interface:Flow.DataflowObject
 meetWith	src/flow/Liveness.java	/^        public void meetWith(Flow.DataflowObject o) $/;"	m	class:Liveness.VarSet
 meetWith	src/submit/Faintness.java	/^        public void meetWith (Flow.DataflowObject o) {}$/;"	m	class:Faintness.MyDataflowObject
-meetWith	src/submit/ReachingDefs.java	/^        public void meetWith (Flow.DataflowObject o) {}$/;"	m	class:ReachingDefs.MyDataflowObject
+meetWith	src/submit/ReachingDefs.java	/^        public void meetWith (Flow.DataflowObject o) {$/;"	m	class:ReachingDefs.MyDataflowObject
+my_results_dir	test.py	/^	my_results_dir = ".\/my_results"$/;"	v
 newTempVar	src/flow/ConstantProp.java	/^    public Flow.DataflowObject newTempVar() {$/;"	m	class:ConstantProp
 newTempVar	src/flow/Flow.java	/^        DataflowObject newTempVar();$/;"	m	interface:Flow.Analysis
 newTempVar	src/flow/Liveness.java	/^    public Flow.DataflowObject newTempVar() { return new VarSet(); }$/;"	m	class:Liveness
 newTempVar	src/submit/Faintness.java	/^    public Flow.DataflowObject newTempVar() { return null; }$/;"	m	class:Faintness
-newTempVar	src/submit/ReachingDefs.java	/^    public Flow.DataflowObject newTempVar() { return null; }$/;"	m	class:ReachingDefs
+newTempVar	src/submit/ReachingDefs.java	/^    public Flow.DataflowObject newTempVar() {$/;"	m	class:ReachingDefs
 out	src/flow/ConstantProp.java	/^    private ConstantPropTable[] in, out;$/;"	f	class:ConstantProp	file:
 out	src/flow/Liveness.java	/^    private VarSet[] in, out;$/;"	f	class:Liveness	file:
 out	src/submit/Faintness.java	/^    private MyDataflowObject[] in, out;$/;"	f	class:Faintness	file:
 out	src/submit/ReachingDefs.java	/^    private MyDataflowObject[] in, out;$/;"	f	class:ReachingDefs	file:
+output	test_cases.json	/^		"output": "Test.cp.out"$/;"	s	object:2
+output	test_cases.json	/^		"output": "Test.lv.out"$/;"	s	object:0
+output	test_cases.json	/^		"output": "Test.rd.out"$/;"	s	object:4
+output	test_cases.json	/^		"output": "TestTwo.cp.out"$/;"	s	object:3
+output	test_cases.json	/^		"output": "TestTwo.lv.out"$/;"	s	object:1
+output	test_cases.json	/^		"output": "TestTwo.rd.out"$/;"	s	object:5
 postprocess	src/flow/ConstantProp.java	/^    public void postprocess(ControlFlowGraph cfg) {$/;"	m	class:ConstantProp
 postprocess	src/flow/Flow.java	/^        void postprocess (ControlFlowGraph cfg);$/;"	m	interface:Flow.Analysis
 postprocess	src/flow/Liveness.java	/^    public void postprocess(ControlFlowGraph cfg) {$/;"	m	class:Liveness
@@ -137,50 +176,53 @@ processQuad	src/flow/ConstantProp.java	/^    public void processQuad(Quad q) {$/
 processQuad	src/flow/Flow.java	/^        void processQuad(Quad q);$/;"	m	interface:Flow.Analysis
 processQuad	src/flow/Liveness.java	/^    public void processQuad(Quad q) {$/;"	m	class:Liveness
 processQuad	src/submit/Faintness.java	/^    public void processQuad(Quad q) {}$/;"	m	class:Faintness
-processQuad	src/submit/ReachingDefs.java	/^    public void processQuad(Quad q) {}$/;"	m	class:ReachingDefs
+processQuad	src/submit/ReachingDefs.java	/^    public void processQuad(Quad q) {$/;"	m	class:ReachingDefs
 register	src/flow/ConstantProp.java	/^        public static void register(String key) {$/;"	m	class:ConstantProp.ConstantPropTable
 registerAnalysis	src/flow/Flow.java	/^        void registerAnalysis(Analysis a);$/;"	m	interface:Flow.Solver
 registerAnalysis	src/submit/MySolver.java	/^    public void registerAnalysis(Flow.Analysis analyzer) {$/;"	m	class:MySolver
 reset	src/flow/ConstantProp.java	/^        public static void reset() {$/;"	m	class:ConstantProp.ConstantPropTable
 set	src/flow/Liveness.java	/^        private Set<String> set;$/;"	f	class:Liveness.VarSet	file:
+set	src/submit/ReachingDefs.java	/^	private Set<Definition> set;$/;"	f	class:ReachingDefs.MyDataflowObject	file:
 setConst	src/flow/ConstantProp.java	/^        public void setConst(String key, int val) {$/;"	m	class:ConstantProp.ConstantPropTable
 setConst	src/flow/ConstantProp.java	/^        public void setConst(int val) {$/;"	m	class:ConstantProp.SingleCP
 setEntry	src/flow/ConstantProp.java	/^    public void setEntry(Flow.DataflowObject value) {$/;"	m	class:ConstantProp
 setEntry	src/flow/Flow.java	/^        void setEntry(DataflowObject value);$/;"	m	interface:Flow.Analysis
 setEntry	src/flow/Liveness.java	/^    public void setEntry(Flow.DataflowObject value) $/;"	m	class:Liveness
 setEntry	src/submit/Faintness.java	/^    public void setEntry(Flow.DataflowObject value) {}$/;"	m	class:Faintness
-setEntry	src/submit/ReachingDefs.java	/^    public void setEntry(Flow.DataflowObject value) {}$/;"	m	class:ReachingDefs
+setEntry	src/submit/ReachingDefs.java	/^    public void setEntry(Flow.DataflowObject value) {$/;"	m	class:ReachingDefs
 setExit	src/flow/ConstantProp.java	/^    public void setExit(Flow.DataflowObject value) {$/;"	m	class:ConstantProp
 setExit	src/flow/Flow.java	/^        void setExit(DataflowObject value);$/;"	m	interface:Flow.Analysis
 setExit	src/flow/Liveness.java	/^    public void setExit(Flow.DataflowObject value) $/;"	m	class:Liveness
 setExit	src/submit/Faintness.java	/^    public void setExit(Flow.DataflowObject value) {}$/;"	m	class:Faintness
-setExit	src/submit/ReachingDefs.java	/^    public void setExit(Flow.DataflowObject value) {}$/;"	m	class:ReachingDefs
+setExit	src/submit/ReachingDefs.java	/^    public void setExit(Flow.DataflowObject value) {$/;"	m	class:ReachingDefs
+setID	src/submit/ReachingDefs.java	/^	    public void setID(int ID) {$/;"	m	class:ReachingDefs.Definition
 setIn	src/flow/ConstantProp.java	/^    public void setIn(Quad q, Flow.DataflowObject value) {$/;"	m	class:ConstantProp
 setIn	src/flow/Flow.java	/^        void setIn(Quad q, DataflowObject value);$/;"	m	interface:Flow.Analysis
 setIn	src/flow/Liveness.java	/^    public void setIn(Quad q, Flow.DataflowObject value) $/;"	m	class:Liveness
 setIn	src/submit/Faintness.java	/^    public void setIn(Quad q, Flow.DataflowObject value) {}$/;"	m	class:Faintness
-setIn	src/submit/ReachingDefs.java	/^    public void setIn(Quad q, Flow.DataflowObject value) {}$/;"	m	class:ReachingDefs
+setIn	src/submit/ReachingDefs.java	/^    public void setIn(Quad q, Flow.DataflowObject value) {$/;"	m	class:ReachingDefs
 setNAC	src/flow/ConstantProp.java	/^        public void setNAC() {$/;"	m	class:ConstantProp.SingleCP
 setNAC	src/flow/ConstantProp.java	/^        public void setNAC(String key) {$/;"	m	class:ConstantProp.ConstantPropTable
 setOut	src/flow/ConstantProp.java	/^    public void setOut(Quad q, Flow.DataflowObject value) {$/;"	m	class:ConstantProp
 setOut	src/flow/Flow.java	/^        void setOut(Quad q, DataflowObject value);$/;"	m	interface:Flow.Analysis
 setOut	src/flow/Liveness.java	/^    public void setOut(Quad q, Flow.DataflowObject value) $/;"	m	class:Liveness
 setOut	src/submit/Faintness.java	/^    public void setOut(Quad q, Flow.DataflowObject value) {}$/;"	m	class:Faintness
-setOut	src/submit/ReachingDefs.java	/^    public void setOut(Quad q, Flow.DataflowObject value) {}$/;"	m	class:ReachingDefs
+setOut	src/submit/ReachingDefs.java	/^    public void setOut(Quad q, Flow.DataflowObject value) {$/;"	m	class:ReachingDefs
 setToBottom	src/flow/ConstantProp.java	/^        public void setToBottom() {$/;"	m	class:ConstantProp.ConstantPropTable
 setToBottom	src/flow/ConstantProp.java	/^        public void setToBottom() {$/;"	m	class:ConstantProp.SingleCP
 setToBottom	src/flow/Flow.java	/^        void setToBottom();$/;"	m	interface:Flow.DataflowObject
 setToBottom	src/flow/Liveness.java	/^        public void setToBottom() { set = new TreeSet<String>(universalSet); }$/;"	m	class:Liveness.VarSet
 setToBottom	src/submit/Faintness.java	/^        public void setToBottom() {}$/;"	m	class:Faintness.MyDataflowObject
-setToBottom	src/submit/ReachingDefs.java	/^        public void setToBottom() {}$/;"	m	class:ReachingDefs.MyDataflowObject
+setToBottom	src/submit/ReachingDefs.java	/^        public void setToBottom() {$/;"	m	class:ReachingDefs.MyDataflowObject
 setToTop	src/flow/ConstantProp.java	/^        public void setToTop() {$/;"	m	class:ConstantProp.ConstantPropTable
 setToTop	src/flow/ConstantProp.java	/^        public void setToTop() {$/;"	m	class:ConstantProp.SingleCP
 setToTop	src/flow/Flow.java	/^        void setToTop();$/;"	m	interface:Flow.DataflowObject
 setToTop	src/flow/Liveness.java	/^        public void setToTop() { set = new TreeSet<String>(); }$/;"	m	class:Liveness.VarSet
 setToTop	src/submit/Faintness.java	/^        public void setToTop() {}$/;"	m	class:Faintness.MyDataflowObject
-setToTop	src/submit/ReachingDefs.java	/^        public void setToTop() {}$/;"	m	class:ReachingDefs.MyDataflowObject
+setToTop	src/submit/ReachingDefs.java	/^        public void setToTop() {$/;"	m	class:ReachingDefs.MyDataflowObject
 setUndef	src/flow/ConstantProp.java	/^        public void setUndef() {$/;"	m	class:ConstantProp.SingleCP
 setUndef	src/flow/ConstantProp.java	/^        public void setUndef(String key) {$/;"	m	class:ConstantProp.ConstantPropTable
+setVar	src/submit/ReachingDefs.java	/^	    public void setVar(String var) {$/;"	m	class:ReachingDefs.Definition
 state	src/flow/ConstantProp.java	/^        private int state;$/;"	f	class:ConstantProp.SingleCP	file:
 submit	src/submit/Faintness.java	/^package submit;$/;"	p
 submit	src/submit/MySolver.java	/^package submit;$/;"	p
@@ -190,17 +232,29 @@ test	src/examples/ExprTest.java	/^  int test (int a) {$/;"	m	class:ExprTest
 test	src/test/Test.java	/^package test;$/;"	p
 test	src/test/TestTwo.java	/^package test;$/;"	p
 test1	src/submit/TestFaintness.java	/^    void test1() {$/;"	m	class:TestFaintness
+test_case	test_cases.json	/^		"test_case": "test.Test", $/;"	s	object:4
+test_case	test_cases.json	/^		"test_case": "test.Test",$/;"	s	object:0
+test_case	test_cases.json	/^		"test_case": "test.Test",$/;"	s	object:2
+test_case	test_cases.json	/^		"test_case": "test.TestTwo", $/;"	s	object:5
+test_case	test_cases.json	/^		"test_case": "test.TestTwo",$/;"	s	object:1
+test_case	test_cases.json	/^		"test_case": "test.TestTwo",$/;"	s	object:3
+test_cases	test.py	/^		test_cases = json.load(f)$/;"	v
 toString	src/flow/ConstantProp.java	/^        public String toString() {$/;"	m	class:ConstantProp.ConstantPropTable
 toString	src/flow/ConstantProp.java	/^        public String toString() {$/;"	m	class:ConstantProp.SingleCP
 toString	src/flow/Liveness.java	/^        public String toString() $/;"	m	class:Liveness.VarSet
 toString	src/submit/Faintness.java	/^        public String toString() { return ""; }$/;"	m	class:Faintness.MyDataflowObject
-toString	src/submit/ReachingDefs.java	/^        public String toString() { return ""; }$/;"	m	class:ReachingDefs.MyDataflowObject
+toString	src/submit/ReachingDefs.java	/^	    public String toString() {$/;"	m	class:ReachingDefs.Definition
+toString	src/submit/ReachingDefs.java	/^        public String toString() {$/;"	m	class:ReachingDefs.MyDataflowObject
 transfer	src/flow/ConstantProp.java	/^        public void transfer(String key, String src) {$/;"	m	class:ConstantProp.ConstantPropTable
 transferfn	src/flow/ConstantProp.java	/^    private TransferFunction transferfn = new TransferFunction();$/;"	f	class:ConstantProp	file:
 transferfn	src/flow/Liveness.java	/^    private TransferFunction transferfn = new TransferFunction ();$/;"	f	class:Liveness	file:
+transferfn	src/submit/ReachingDefs.java	/^    private TransferFunction transferfn = new TransferFunction();$/;"	f	class:ReachingDefs	file:
 universalSet	src/flow/Liveness.java	/^        public static Set<String> universalSet;$/;"	f	class:Liveness.VarSet
+universalSet	src/submit/ReachingDefs.java	/^	public static Set<Definition> universalSet;$/;"	f	class:ReachingDefs.MyDataflowObject
 val	src/flow/ConstantProp.java	/^        ConstantPropTable val;$/;"	f	class:ConstantProp.TransferFunction
 val	src/flow/Liveness.java	/^        VarSet val;$/;"	f	class:Liveness.TransferFunction
+val	src/submit/ReachingDefs.java	/^	    MyDataflowObject val;$/;"	f	class:ReachingDefs.TransferFunction
+var	src/submit/ReachingDefs.java	/^	    private String var;$/;"	f	class:ReachingDefs.Definition	file:
 visitALength	src/flow/ConstantProp.java	/^        public void visitALength(Quad q) {$/;"	m	class:ConstantProp.TransferFunction
 visitALoad	src/flow/ConstantProp.java	/^        public void visitALoad(Quad q) {$/;"	m	class:ConstantProp.TransferFunction
 visitBinary	src/flow/ConstantProp.java	/^        public void visitBinary(Quad q) {$/;"	m	class:ConstantProp.TransferFunction
@@ -217,4 +271,5 @@ visitNew	src/flow/ConstantProp.java	/^        public void visitNew(Quad q) {$/;"
 visitNewArray	src/flow/ConstantProp.java	/^        public void visitNewArray(Quad q) {$/;"	m	class:ConstantProp.TransferFunction
 visitQuad	src/examples/CountQuads.java	/^        public void visitQuad(Quad q) {$/;"	m	class:CountQuads.QuadCounter
 visitQuad	src/flow/Liveness.java	/^        public void visitQuad(Quad q) {$/;"	m	class:Liveness.TransferFunction
+visitQuad	src/submit/ReachingDefs.java	/^	    public void visitQuad(Quad q) {$/;"	m	class:ReachingDefs.TransferFunction
 visitUnary	src/flow/ConstantProp.java	/^        public void visitUnary(Quad q) {$/;"	m	class:ConstantProp.TransferFunction
