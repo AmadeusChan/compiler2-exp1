@@ -1,0 +1,22 @@
+[
+	{
+		"analysis": "flow.Liveness",
+		"test_case": "test.Test",
+		"output": "Test.lv.out"
+	}, 
+	{
+		"analysis": "flow.Liveness",
+		"test_case": "test.TestTwo",
+		"output": "TestTwo.lv.out"
+	}, 
+	{
+		"analysis": "flow.ConstantProp",
+		"test_case": "test.Test",
+		"output": "Test.cp.out"
+	}, 
+	{
+		"analysis": "flow.ConstantProp",
+		"test_case": "test.TestTwo",
+		"output": "TestTwo.cp.out"
+	}
+]
