@@ -4,6 +4,9 @@ package submit;
 import joeq.Compiler.Quad.*;
 import flow.Flow;
 
+import joeq.Compiler.Quad.Operand.RegisterOperand; 
+import java.util.*;
+
 /**
  * Skeleton class for implementing a faint variable analysis
  * using the Flow.Analysis interface.
@@ -42,7 +45,7 @@ public class Faintness implements Flow.Analysis {
 		ArrayList<String> removeList = new ArrayList<String>();
 		MyDataflowObject a = (MyDataflowObject) o;
 		for (String var: set) {
-			if (! a.contains(var)) {
+			if (! a.set.contains(var)) {
 				removeList.add(var);
 			}
 		}
@@ -133,7 +136,7 @@ public class Faintness implements Flow.Analysis {
 
 	// initialize universal set
 	Set<String> s = new TreeSet<String>();
-	int numargs = cfg.getMethod().getParamTypes.length;
+	int numargs = cfg.getMethod().getParamTypes().length;
 	for (int i = 0; i < numargs; ++ i) {
 		s.add("R" + i);
 	}
@@ -170,6 +173,8 @@ public class Faintness implements Flow.Analysis {
          ************************************************/
 
 	transferfn.val = new MyDataflowObject();
+
+	System.out.println("Initialization completed.");
     }
 
     /**
@@ -242,7 +247,7 @@ public class Faintness implements Flow.Analysis {
     }
 
     public Flow.DataflowObject newTempVar() {
-	    return MyDataflowObject();
+	    return new MyDataflowObject();
     }
 
     private TransferFunction transferfn = new TransferFunction();
