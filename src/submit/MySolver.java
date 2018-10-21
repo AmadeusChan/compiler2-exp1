@@ -51,14 +51,62 @@ public class MySolver implements Flow.Solver {
          * Your code goes here *
          ***********************/
 
+	{
+		Flow.DataflowObject top = analysis.newTempVar();
+		top.setToTop();
+		QuadIterator qit = new QuadIterator(cfg);
+		while (qit.hasNext()) {
+			Quad q = qit.next();
+			analysis.setIn(q, top);
+			analysis.setOut(q, top);
+		}
+		if (analysis.isForward()) {
+			analysis.setExit(top);
+		} else {
+			analysis.setEntry(top);
+		}
+	}
 	if (analysis.isForward()) {
-		//boolean isChanged = true;
-		//while (isChanged) {
-		//	isChanged = false;
-		//	QuadIterator qit = new QuadIterator(cfg);
-		//	while (qit.hasNext()) {
-		//	}
-		//}
+		boolean isChanged = true;
+		while (isChanged) {
+			isChanged = false;
+			QuadIterator qit = new QuadIterator(cfg);
+			while (qit.hasNext()) {
+				Quad q = qit.next();
+				Flow.DataflowObject newIn = analysis.newTempVar();
+				newIn.setToTop();
+				Iterator<Quad> preIter = qit.predecessors();
+				while (preIter.hasNext()) {
+					Quad pre = preIter.next();
+					if (pre == null) { // which indicates that it is ENTRY
+						newIn.meetWith(analysis.getEntry());
+					} else {
+						newIn.meetWith(analysis.getOut(pre));
+					}
+				}
+				Flow.DataflowObject oldOut = analysis.getOut(q);
+				analysis.setIn(q, newIn);
+				analysis.processQuad(q);
+				if (!oldOut.equals(analysis.getOut(q))) {
+					isChanged = true;
+				}
+			}
+		}
+		Flow.DataflowObject exitValue = analysis.newTempVar();
+		exitValue.setToTop();
+		QuadIterator qit = new QuadIterator(cfg);
+		while (qit.hasNext()) {
+			Quad q = qit.next();
+			Iterator<Quad> succIter = qit.successors();
+			while (succIter.hasNext()) {
+				Quad succ = succIter.next();
+				if (succ == null) {
+					exitValue.meetWith(analysis.getOut(q));
+					break;
+				}
+			}
+		}
+		analysis.setExit(exitValue);
 	} else {
 		boolean isChanged = true;
 		while (isChanged) {
