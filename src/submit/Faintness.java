@@ -262,21 +262,33 @@ public class Faintness implements Flow.Analysis {
 
 	    @Override 
 	    public void visitQuad(Quad q) {
-		    for (RegisterOperand def: q.getDefinedRegisters()) {
-			    val.genFan(def.getRegister().toString());
-		    }
+		    //if (q.getID() == 9) {
+		    //        System.out.println("located");
+		    //}
 		    if (q.getOperator() instanceof Operator.Move || q.getOperator() instanceof Operator.Binary) {
 			    ArrayList<String> dstList = new ArrayList<String>();
 			    for (RegisterOperand def : q.getDefinedRegisters()) {
 				    dstList.add(def.getRegister().toString());
 			    }
 			    boolean isDstFant = val.isDstFant(dstList);
+			    //if (q.getID() == 9) {
+			    //        System.out.println(isDstFant);
+			    //        for (RegisterOperand def : q.getDefinedRegisters()) {
+			    //    	    System.out.println(def.getRegister().toString());
+			    //        }
+			    //}
+		    	    for (RegisterOperand def: q.getDefinedRegisters()) {
+		    	            val.genFan(def.getRegister().toString());
+		    	    }
 			    if (! isDstFant) {
 				    for (RegisterOperand use: q.getUsedRegisters()) {
 					    val.killFan(use.getRegister().toString());
 				    }
 			    }
 		    } else {
+		    	    for (RegisterOperand def: q.getDefinedRegisters()) {
+		    	            val.genFan(def.getRegister().toString());
+		    	    }
 			    for (RegisterOperand use: q.getUsedRegisters()) {
 				    val.killFan(use.getRegister().toString());
 			    }

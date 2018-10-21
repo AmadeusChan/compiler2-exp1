@@ -33,6 +33,7 @@ class TestFaintness {
      * 		(a) all the defined variable in this quad are faint
      * 		(b) none of the defined variable in this quad is faint
      * (3) some additional case concerning branch
+     * Nevertheless, the actual situation is much more complex due to the loss of original code structure after the java compiler
      */
 
     /**
@@ -49,21 +50,19 @@ class TestFaintness {
     /**
      * no MOVE/BINARY: some of the variable are faint, in this case, all variables except a are faint since only the value of a is finally used
      */
-    void test3() {
-	    int a = 1;
+    int test3() {
+	    int a = (int)Math.sin(100);
 	    int b = 2;
-	    int c = 3;
 	    return a;
     }
 
     /**
-     * no MOVE/BINARY: none of the variables is faint since they all contribute to the final output value
+     * no MOVE/BINARY(actually with): none of the variables is faint since they all contribute to the final output value
      */
-    void test4() {
-	    int a = 1;
-	    int b = 2;
-	    int c = 3;
-	    return a + b + c;
+    int test4() {
+	    int a = (int)Math.sin(1);
+	    int b = (int)Math.sin(2);
+	    return a + b;
     }
 
     /**
@@ -82,7 +81,7 @@ class TestFaintness {
      * faint-variables: none
      * reason: since c is not faint, and as a result, these variables used to calculate c are not faint
      */
-    void test6() {
+    int test6() {
 	    int a = 1;
 	    int b = 2;
 	    int c = a + b;
@@ -94,8 +93,8 @@ class TestFaintness {
      * faint-variables: none
      * reason: since a may be used in one of the if case
      */
-    void test7() {
-	    int a = 1 + 1000;
+    int test7() {
+	    int a = (int)Math.sin(10);
 	    if (a > 10) {
 		    return a;
 	    } else {
